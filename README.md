@@ -1,3 +1,5 @@
+NOTE: work-in-progress
+
 Goals:
 
 - Async load static GTFS data from urls
