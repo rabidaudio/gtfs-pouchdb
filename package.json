@@ -12,8 +12,12 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "csv-parse": "^4.8.8",
+    "gtfs-sequelize": "^3.0.1",
     "pouchdb": "^7.2.1",
     "process": "^0.11.10",
+    "spatiasql": "^3.0.2-beta",
+    "sqlite3": "^4.2.0",
+    "streamsql": "^0.8.5",
     "yauzl": "^2.10.0",
     "yauzl-promise": "^2.1.3"
   },
