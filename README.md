@@ -35,6 +35,36 @@ https://www.npmjs.com/package/gtfs-realtime-bindings-transit
 https://github.com/blinktaginc/gtfs-to-geojson
 
 
+dumping to a pouchdb file isn't a good idea. the file format is not optimized, so a 12MB zip file ends up as a 207MB dump,
+which is terribly unscalable.
+
+However, in playing with pouchdb-replication-stream, it seems streams are cross-platform using browserify. Perhaps that means
+our unzip implementation can run in the browser
+
+beefy is a way to quickly see if a script works in the browser
+
+https://pouchdb.com/faq.html#data_limits
+
+perhaps in the browser, data refresh can be handled by service worker. Otherwise we're blocking the main thread
+
+Options: 
+- PouchDB
+  - IndexedDB-backed database with couchdb api
+  - cross-platform, and and supported by basically all browsers (even IE11 and Edge, with caveats) (97%)
+  - NoSQL, which means re-thinking the table structure for queries
+  - 12MB zip ends up taking up 180MB on filesystem in node, 207MB in dump format
+  - GIS support via geopouch
+- sql.js
+  - webassembly compilation of Sqlite
+  - in-memory db only, no support for in-browser storage
+  - no IE coverage for webassembly, (90%)
+  - GIS via spatiasql.js
+- WebSQL
+  - native-browser sqlite implementation
+  - webkit browsers only, no firefox/IE (75%)
+  - abandoned by W3C, will never become standard
+  - probably no GIS support?
+
 ```
 Filename 	Required 	Defines
 agency.txt 	Required 	Transit agencies with service represented in this dataset.
